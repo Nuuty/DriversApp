@@ -1,0 +1,21 @@
+﻿@model RuntagIndexViewModel
+@{
+    ViewData["Title"] = "Køresedler";
+}
+<h1>@ViewData["Title"]</h1>
+<a asp-controller="Runtag" asp-action="Create">Opret køreseddel</a>
+@if (Model.Runtags != null && Model.Runtags.Any())
+{
+    foreach (var runtag in Model.Runtags)
+    {
+        <h2>@runtag.Title</h2>
+        <p>@runtag.CustomerName</p>
+        <p>@runtag.Address</p>
+        <p>@runtag.Description</p>
+        <p>@runtag.DueTime</p>
+        <a asp-controller="Runtag" asp-action="Delete" asp-route-id="@runtag.Id">Slet</a>
+        <a asp-controller="Runtag" asp-action="Edit" asp-route-id="@runtag.Id">Ret</a>
+        
+    }
+}
+

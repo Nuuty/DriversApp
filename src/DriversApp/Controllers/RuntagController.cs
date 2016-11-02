@@ -83,5 +83,10 @@ namespace DriversApp.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult Calendar(int id)
+        {
+            return View();
+        }
     }
 }

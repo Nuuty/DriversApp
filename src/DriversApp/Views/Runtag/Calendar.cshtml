@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Calendar";
+    <link rel="stylesheet" href="css/CLNDR.css"/>
 }
 
 @*
@@ -15,53 +16,65 @@
 
 <h1>@ViewBag.Title</h1>
 
-@*Target container*@
-<div id="mini-clndr"></div>
-
 @*Underscore template - Output cannot be seen in "view page source", but use developer tools to see output (f12)*@
-<script id="calendar-template" type="text/template">
-    <div class="controls">
-        <div class="clndr-previous-button">&lsaquo;</div><div class="month"><%= month %></div><div class="clndr-next-button">&rsaquo;</div>
-    </div>
-
-    <div class="days-container">
-        <div class="days">
-            <div class="headers">
-                <% _.each(daysOfTheWeek, function(day) { %><div class="day-header"><%= day %></div><% }); %>
+<div class="container">
+    <div class="cal1"></div>
+    <div class="cal2">
+        <script type="text/template" id="template-calendar">
+            <div class="clndr-controls">
+                <div class="clndr-previous-button">&lsaquo;</div>
+                <div class="month"><%= intervalStart.format('M/DD') + ' &mdash; ' + intervalEnd.format('M/DD') %></div>
+                <div class="clndr-next-button">&rsaquo;</div>
             </div>
-            <% _.each(days, function(day) { %><div class="<%= day.classes %>" id="<%= day.id %>"><%= day.day %></div><% }); %>
-        </div>
+            <div class="clndr-grid">
+                <div class="days-of-the-week">
+                    <% _.each(daysOfTheWeek, function(day) { %>
+                    <div class="header-day"><%= day %></div>
+                    <% }); %>
+                    <div class="days">
+                        <% _.each(days, function(day) { %>
+                        <div class="<%= day.classes %>"><%= day.day %></div>
+                        <% }); %>
+                    </div>
+                </div>
+            </div>
+            <div class="clndr-today-button">Today</div>
+        </script>
     </div>
-</script>
+    <div class="cal3">
+        <script type="text/template" id="template-calendar-months">
+            <div class="clndr-controls top">
+                <div class="clndr-previous-button">&lsaquo;</div>
+                <div class="clndr-next-button">&rsaquo;</div>
+            </div>
+            <div class="clearfix">
+                <% _.each(months, function(cal) { %>
+                <div class="cal">
+                    <div class="clndr-controls">
+                        <div class="month"><%= cal.month.format('MMMM') %></div>
+                    </div>
+                    <div class="clndr-grid">
+                        <div class="days-of-the-week">
+                            <% _.each(daysOfTheWeek, function(day) { %>
+                            <div class="header-day"><%= day %></div>
+                            <% }); %>
+                            <div class="days">
+                                <% _.each(cal.days, function(day) { %>
+                                <div class="<%= day.classes %>"><%= day.day %></div>
+                                <% }); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+            <div class="clndr-today-button">Today</div>
+        </script>
+    </div>
+</div>
 
-@*Logic for the calendar - Write new javascript here.*@
-@section Scripts {
-    <script type="text/javascript">
-
-        var currentMonth = moment().format('YYYY-MM');
-        var nextMonth = moment().add('month', 1).format('YYYY-MM');
-        var events = [
-          { date: currentMonth + '-' + '10', title: 'Persian Kitten Auction', location: 'Center for Beautiful Cats' },
-          { date: currentMonth + '-' + '19', title: 'Cat Frisbee', location: 'Jefferson Park' },
-          { date: currentMonth + '-' + '23', title: 'Kitten Demonstration', location: 'Center for Beautiful Cats' },
-          { date: nextMonth + '-' + '07', title: 'Small Cat Photo Session', location: 'Center for Cat Photography' }
-        ];
-
-        $('#mini-clndr').clndr({
-            template: $('#calendar-template').html(),
-            events: events,
-            clickEvents: {
-                click: function (target) {
-                    if (target.events.length) {
-                        var daysContainer = $('#mini-clndr').find('.days-container');
-                        daysContainer.toggleClass('show-events', true);
-                        $('#mini-clndr').find('.x-button').click(function () {
-                            daysContainer.toggleClass('show-events', false);
-                        });
-                    }
-                }
-            },
-            adjacentDaysChangeMonth: true
-        });
-    </script>
-}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="../Assets/JS/CLNDR.js"></script>
+<script src="../Assets/JS/demo.js"></script>

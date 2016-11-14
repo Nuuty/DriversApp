@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using DriversApp.Data;
@@ -30,6 +31,18 @@ namespace DriversApp.Controllers
         public IActionResult Create()
         {
             var viewModel = new RuntagViewModel();
+            var queryStrings = Request.Query;
+            if (queryStrings.ContainsKey("dato"))
+            {
+                var dateTime = DateTime.Parse(queryStrings["dato"]);
+                viewModel.DueTime = dateTime;
+            }
+            else
+            {
+                viewModel.DueTime = DateTime.Today;
+            }
+
+
             return View(viewModel);
         }
         [HttpPost]

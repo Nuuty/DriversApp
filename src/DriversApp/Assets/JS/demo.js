@@ -37,6 +37,9 @@ $(document).ready(function () {
         events: eventArray,
         clickEvents: {
             click: function (target) {
+                var targen = target.date.format("L");
+                location.href = "Create?dato=" + targen;
+
                 console.log('Cal-1 clicked: ', target);
             },
             today: function () {

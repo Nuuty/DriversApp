@@ -49,6 +49,17 @@
                 "<span class='clndr-next-button'>next</span>" +
             "</div>" +
         "</div>" +
+        //event listing
+        "<div class='event-listing'>"+
+  "<div class='event-listing-title'>EVENTS THIS MONTH</div>"+
+  "<% _.each(eventsThisMonth, function(event) { %>"+
+      "<div class='event-item'>"+
+        "<div class='event-item-name'><%= event.title %></div>"+
+        "<div class='event-item-location'><%= event.date %></div>"+
+      "</div>"+
+    "<% }); %>"+
+"</div>" +
+//event listing slut
         "<table class='clndr-table' border='0' cellspacing='0' cellpadding='0'>" +
             "<thead>" +
                 "<tr class='header-days'>" +

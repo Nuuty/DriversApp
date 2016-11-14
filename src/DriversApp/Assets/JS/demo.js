@@ -12,19 +12,36 @@ $(document).ready(function () {
 
     // Here's some magic to make sure the dates are happening this month.
     var thisMonth = moment().format('YYYY-MM');
+    
     // Events to load into calendar
     var eventArray = [
+        //{
+        //    title: 'Multi-Day Event',
+        //    endDate: thisMonth + '-14',
+        //    startDate: thisMonth + '-10'
+        //}, {
+        //    endDate: thisMonth + '-23',
+        //    startDate: thisMonth + '-21',
+        //    title: 'Another Multi-Day Event'
+        //}, {
+        //    date: thisMonth + '-28',
+        //    title: 'Single Day Event'
+        //}
         {
-            title: 'Multi-Day Event',
-            endDate: thisMonth + '-14',
-            startDate: thisMonth + '-10'
-        }, {
-            endDate: thisMonth + '-23',
-            startDate: thisMonth + '-21',
-            title: 'Another Multi-Day Event'
-        }, {
-            date: thisMonth + '-27',
-            title: 'Single Day Event'
+            title: 'Knud skal have køleskab',
+            date: thisMonth + '-15'
+        },
+        {
+            title: 'Martin skal have ny pc',
+            date: thisMonth + '-17'
+        },
+        {
+            title: 'Benjamin skal have vaskemaskine',
+            date: thisMonth + '-23'
+        },
+        {
+            title: 'Karsten skal have tørretumbler',
+            date: thisMonth + '-23'
         }
     ];
 

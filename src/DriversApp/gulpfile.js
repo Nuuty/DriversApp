@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='default' />
+﻿/// <binding BeforeBuild='default, scripts' />
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 
